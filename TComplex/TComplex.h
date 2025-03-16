@@ -324,3 +324,4 @@ inline istream& operator>>(istream& i, TComplex<T>& b)
   return i;
 }
 
+void print();
