@@ -44,10 +44,8 @@ public:
   void PrintTrig();
 
 
-  template<class T>
   friend ostream& operator<<(ostream& o, TComplex<T>& b);
 
-  template<class T>
   friend istream& operator>>(istream& i, TComplex& b);
 };
 
