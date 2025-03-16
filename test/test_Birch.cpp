@@ -1,403 +1,171 @@
-#include "All_Instruments.h"
-#include "Electrical.h"
-#include "Classical.h"
-#include "Synthesizer.h"
-#include "Original.h"
-#include "Symphonic.h"
-#include "Folk.h"
+#include "TComplex.h"
 
 #include <gtest.h>
 
 
 ///Тесты для класса TAllInstruments
-TEST(TAllInstruments, can_create_TAllInstruments_with_positive_count)
+TEST(TComplex, can_create_Complex_with_positive_count)
 {
-  ASSERT_NO_THROW(TAllInstruments ins(8));
+  ASSERT_NO_THROW(TComplex<double> z(8,5));
 }
 
 
-TEST(TAllInstruments, can_get_count)
+TEST(TComplex, can_get_real_part_of_number)
 {
-  TAllInstruments ins(8);
-  EXPECT_NEAR(8, ins.GetCount(), 0.000001);
+  TComplex<double> z(8,5);
+  EXPECT_NEAR(8, z.GetRe(), 0.000001);
 }
 
 
-TEST(TAllInstruments, can_copy)
+TEST(TComplex, can_get_imaginary_part_of_number)
 {
-  TAllInstruments ins(8);
-  TAllInstruments b(ins);
+  TComplex<double> z(8, 5);
+  EXPECT_NEAR(5, z.GetIm(), 0.000001);
 }
 
 
-TEST(TAllInstruments, throws_when_create_instrument_with_negative_count)
+TEST(TComplex, can_copy)
 {
-  ASSERT_ANY_THROW(TAllInstruments ins(-4));
+  TComplex<double> z(2,3);
+  TComplex<double> p(z);
+  EXPECT_NEAR(1, p==z, 0.000001);
 }
 
 
-TEST(TAllInstruments, can_set_count)
+TEST(TComplex, can_set_real_part_of_number)
 {
-  TAllInstruments ins(10);
+  TComplex<double> z;
 
-  ins.SetCount(3);
-  EXPECT_NE(0, ins.GetCount());
+  z.SetRe(3);
+  EXPECT_NE(0, z.GetRe());
 }
 
 
-///Тесты для класса TСlassical
-TEST(TClassical, can_create_TClassical_with_positive_count)
+TEST(TComplex, can_set_imaginary_part_of_number)
 {
-  ASSERT_NO_THROW(TClassical ins(8));
+  TComplex<double> z;
+
+  z.SetIm(3);
+  EXPECT_NE(0, z.GetIm());
 }
 
 
-TEST(TClassical, can_get_count)
+TEST(TComplex, can_add_numbers)
 {
-  TClassical ins(8);
-  EXPECT_NEAR(8, ins.GetCount(), 0.000001);
+  TComplex<double> z(2, 3),p(3,5),r(5,8);
+  EXPECT_NEAR(1, (z+p)==r, 0.000001);
 }
 
 
-TEST(TClassical, can_copy)
+TEST(TComplex, can_subtract_numbers)
 {
-  TClassical ins(8);
-  TClassical b(ins);
+  TComplex<double> z(2, 3), p(3, 5), r(-1, -2);
+  EXPECT_NEAR(1, (z - p) == r, 0.000001);
 }
 
 
-TEST(TClassical, throws_when_create_instrument_with_negative_count)
+TEST(TComplex, can_multiply_numbers)
 {
-  ASSERT_ANY_THROW(TClassical ins(-4));
+  TComplex<double> z(2, 3), p(3, 5), r(-9, 19);
+  EXPECT_NEAR(1, (z * p) == r, 0.000001);
 }
 
 
-TEST(TClassical, can_set_count)
+TEST(TComplex, can_divide_numbers)
 {
-  TClassical ins(10);
-  ins.SetCount(3);
-  EXPECT_NE(0, ins.GetCount());
+  TComplex<double> z(4, 0), p(2,0), r(2,0);
+  EXPECT_NEAR(1, (z / p) == r, 0.000001);
 }
 
 
-TEST(TClassical, can_get_orchestra)
+TEST(TComplex, can_equal_add_numbers)
 {
-  TClassical ins(8);
-
-  EXPECT_NEAR(0, ins.GetOrchestra(), 0.000001);
+  TComplex<double> z(2, 3), p(3, 5), r(5, 8);
+  z += p;
+  EXPECT_NEAR(1, z == r, 0.000001);
 }
 
 
-TEST(TClassical, can_set_orchestra)
+TEST(TComplex, can_equal_subtract_numbers)
 {
-  TClassical ins(10);
-  ins.SetOrchestra(1);
-  EXPECT_NE(0, ins.GetOrchestra());
+  TComplex<double> z(2, 3), p(3, 5), r(-1, -2);
+  z -= p;
+  EXPECT_NEAR(1, z == r, 0.000001);
 }
 
 
-///Тесты для класса Electrical
-TEST(TElectrical, can_create_TElectrical_with_positive_count)
+TEST(TComplex, can_equal_multiply_numbers)
 {
-  ASSERT_NO_THROW(TElectrical ins(8));
+  TComplex<double> z(2, 3), p(3, 5), r(-9, 19);
+  z *= p;
+  EXPECT_NEAR(1, z == r, 0.000001);
 }
 
 
-TEST(TElectrical, can_get_count)
+TEST(TComplex, can_equal_divide_numbers)
 {
-  TElectrical ins(8);
-  EXPECT_NEAR(8, ins.GetCount(), 0.000001);
+  TComplex<double> z(4, 0), p(2, 0), r(2, 0);
+  z /= p;
+  EXPECT_NEAR(1, z == r, 0.000001);
 }
 
 
-TEST(TElectrical, can_copy)
+TEST(TComplex, can_assign_numbers)
 {
-  TElectrical ins(8);
-  TElectrical b(ins);
+  TComplex<double> z(4, 0), p(2, 0);
+  z = p;
+  EXPECT_NEAR(1, z == p, 0.000001);
 }
 
 
-TEST(TElectrical, throws_when_create_instrument_with_negative_count)
+TEST(TComplex, can_equal_numbers)
 {
-  ASSERT_ANY_THROW(TElectrical ins(-4));
+  TComplex<double> z(6, 4), p(6, 4);
+  EXPECT_NEAR(1, z == p, 0.000001);
 }
 
 
-TEST(TElectrical, can_set_count)
+TEST(TComplex, can_not_equal_numbers)
 {
-  TElectrical ins(10);
-  ins.SetCount(3);
-  EXPECT_NE(0, ins.GetCount());
+  TComplex<double> z(6, 4), p(4, 4);
+  EXPECT_NEAR(1, z != p, 0.000001);
 }
 
 
-TEST(TElectrical, can_get_orchestra)
+TEST(TComplex, can_abs_number)
 {
-  TElectrical ins(8);
-
-  EXPECT_NEAR(0, ins.GetOrchestra(), 0.000001);
+  TComplex<double> z(3, 4);
+  EXPECT_NEAR(5, z.Abs(), 0.000001);
 }
 
 
-TEST(TElectrical, can_set_orchestra)
+TEST(TComplex, can_pow_numbers)
 {
-  TElectrical ins(10);
-
-  ins.SetOrchestra(1);
-  EXPECT_NE(0, ins.GetOrchestra());
+  TComplex<double> z(6, 4),p(20,48),r(0,0);
+  r = z.Pow(2);
+  r -= p;
+  EXPECT_NEAR(0, r.Abs(), 0.000001);
 }
 
 
-///Тесты для класса Folk
-TEST(TFolk, can_create_TFolk_with_positive_count)
+TEST(TComplex, can_impow_numbers)
 {
-  ASSERT_NO_THROW(TFolk ins(8));
+  TComplex<double> z(6, 4), p(2,0), r,y(20,48);
+  r = z.ImPow(p);
+  r -= r;
+  EXPECT_NEAR(0, r.Abs(), 0.000001);
 }
 
 
-TEST(TFolk, can_get_count)
+TEST(TComplex, throws_pow_uncertainty_0_0)
 {
-  TFolk ins(8);
-  EXPECT_NEAR(8, ins.GetCount(), 0.000001);
+  TComplex<double> z(0, 0);
+  ASSERT_ANY_THROW(z.Pow(0));
 }
 
 
-TEST(TFolk, can_copy)
+TEST(TComplex, throws_impow_uncertainty_0_0)
 {
-  TFolk ins(8);
-  TFolk b(ins);
-}
-
-
-TEST(TFolk, throws_when_create_instrument_with_negative_count)
-{
-  ASSERT_ANY_THROW(TFolk ins(-4));
-}
-
-
-TEST(TFolk, can_set_count)
-{
-  TFolk ins(10);
-
-  ins.SetCount(3);
-  EXPECT_NE(0, ins.GetCount());
-}
-
-
-TEST(TFolk, can_get_orchestra)
-{
-  TFolk ins(8);
-
-  EXPECT_NEAR(0, ins.GetOrchestra(), 0.000001);
-}
-
-
-TEST(TFolk, can_set_orchestra)
-{
-  TFolk ins(10);
-
-  ins.SetOrchestra(1);
-  EXPECT_NE(0, ins.GetOrchestra());
-}
-
-
-///Тесты для класса Synthesizer
-TEST(TSynthesizer, can_create_TSynthesizer_with_positive_count)
-{
-  ASSERT_NO_THROW(TSynthesizer ins(8));
-}
-
-
-TEST(TSynthesizer, can_get_count)
-{
-  TSynthesizer ins(8);
-  EXPECT_NEAR(8, ins.GetCount(), 0.000001);
-}
-
-
-TEST(TSynthesizer, can_copy)
-{
-  TSynthesizer ins(8);
-  TSynthesizer b(ins);
-}
-
-
-TEST(TSynthesizer, throws_when_create_instrument_with_negative_count)
-{
-  ASSERT_ANY_THROW(TSynthesizer ins(-4));
-}
-
-
-TEST(TSynthesizer, can_set_count)
-{
-  TSynthesizer ins(10);
-
-  ins.SetCount(3);
-  EXPECT_NE(0, ins.GetCount());
-}
-
-
-TEST(TSynthesizer, can_get_orchestra)
-{
-  TSynthesizer ins(8);
-
-  EXPECT_NEAR(0, ins.GetOrchestra(), 0.000001);
-}
-
-
-TEST(TSynthesizer, can_set_orchestra)
-{
-  TSynthesizer ins(10);
-  ins.SetOrchestra(1);
-  EXPECT_NE(0, ins.GetOrchestra());
-}
-
-
-///Тесты для класса Original
-TEST(TOriginal, can_create_TOriginal_with_positive_count)
-{
-  ASSERT_NO_THROW(TOriginal ins(8,1923));
-}
-
-
-TEST(TOriginal, can_get_count)
-{
-  TOriginal ins(8, 1923);
-  EXPECT_NEAR(8, ins.GetCount(), 0.000001);
-}
-
-
-TEST(TOriginal, can_copy)
-{
-  TOriginal ins(8, 1923);
-  TOriginal b(ins);
-}
-
-
-TEST(TOriginal, throws_when_create_instrument_with_negative_count)
-{
-  ASSERT_ANY_THROW(TOriginal ins(-4,1923));
-}
-
-
-TEST(TOriginal, throws_when_create_instrument_with_unreal_date)
-{
-  ASSERT_ANY_THROW(TOriginal ins(4, 1900));
-}
-
-
-TEST(TOriginal, can_set_count)
-{
-  TOriginal ins(8, 1923);
-  ins.SetCount(3);
-  EXPECT_NE(0, ins.GetCount());
-}
-
-
-TEST(TOriginal, can_get_orchestra)
-{
-  TOriginal ins(8, 1923);
-
-  EXPECT_NEAR(0, ins.GetOrchestra(), 0.000001);
-}
-
-
-TEST(TOriginal, can_set_orchestra)
-{
-  TOriginal ins(8, 1923);
-
-  ins.SetOrchestra(1);
-  EXPECT_NE(0, ins.GetOrchestra());
-}
-
-
-TEST(TOriginal, can_get_year_of_made)
-{
-  TOriginal ins(8, 1923);
-
-  EXPECT_NEAR(1923, ins.GetYearOfMade(), 0.000001);
-}
-
-
-TEST(TOriginal, can_set_year_of_made)
-{
-  TOriginal ins(8, 1923);
-
-  ins.SetYearOfMade(1905);
-  EXPECT_NE(0, ins.GetYearOfMade());
-}
-
-
-///Тесты для класса Symphonic
-TEST(TSymphonic, can_create_TSymphonic_with_positive_count)
-{
-  ASSERT_NO_THROW(TSymphonic ins(8, 3));
-}
-
-
-TEST(TSymphonic, can_get_count)
-{
-  TSymphonic ins(8, 3);
-  EXPECT_NEAR(8, ins.GetCount(), 0.000001);
-}
-
-
-TEST(TSymphonic, can_copy)
-{
-  TSymphonic ins(8, 3);
-  TSymphonic b(ins);
-}
-
-
-TEST(TSymphonic, throws_when_create_instrument_with_negative_count)
-{
-  ASSERT_ANY_THROW(TSymphonic ins(-4, 4));
-}
-
-
-TEST(TSymphonic, throws_when_create_instrument_with_negative_standart_count)
-{
-  ASSERT_ANY_THROW(TSymphonic ins(4, -5));
-}
-
-
-TEST(TSymphonic, can_set_count)
-{
-  TSymphonic ins(8, 1923);
-
-  ins.SetCount(3);
-  EXPECT_NE(0, ins.GetCount());
-}
-
-
-TEST(TSymphonic, can_get_orchestra)
-{
-  TSymphonic ins(8, 1923);
-
-  EXPECT_NEAR(0, ins.GetOrchestra(), 0.000001);
-}
-
-
-TEST(TSymphonic, can_set_orchestra)
-{
-  TSymphonic ins(8, 1923);
-
-  ins.SetOrchestra(1);
-  EXPECT_NE(0, ins.GetOrchestra());
-}
-
-
-TEST(TSymphonic, can_get_standart_count)
-{
-  TSymphonic ins(8, 1923);
-  EXPECT_NEAR(1923, ins.GetStandartCountInOrchestra(), 0.000001);
-}
-
-
-TEST(TSymphonic, can_set_standart_count)
-{
-  TSymphonic ins(8, 1923);
-
-  ins.SetStandartCountInOrchestra(1905);
-  EXPECT_NE(0, ins.GetStandartCountInOrchestra());
+  TComplex<double> z(0, 0),r(0,0);
+  ASSERT_ANY_THROW(z.ImPow(r));
 }

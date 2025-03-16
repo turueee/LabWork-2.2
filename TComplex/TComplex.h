@@ -39,8 +39,8 @@ public:
   bool operator==(const TComplex<T>& p);
 
   double Abs();
-  TComplex<double> Pow(double st);
-  TComplex<double> ImPow(TComplex<T> st);
+  TComplex<T> Pow(double st);
+  TComplex<T> ImPow(TComplex<T> st);
   void PrintTrig();
 
 
@@ -208,7 +208,7 @@ inline double TComplex<T>::Abs()
 
 
 template<class T>
-inline TComplex<double> TComplex<T>::Pow(double st)
+inline TComplex<T> TComplex<T>::Pow(double st)
 {
   if (re == 0 && im == 0 && st == 0)
     throw("Uncertainty");
@@ -237,7 +237,7 @@ inline TComplex<double> TComplex<T>::Pow(double st)
 
 
 template<class T>
-inline TComplex<double> TComplex<T>::ImPow(TComplex<T> st)
+inline TComplex<T> TComplex<T>::ImPow(TComplex<T> st)
 {
   if (im == 0 && re == 0 && st.im == 0 && st.re == 0)
   {
@@ -267,7 +267,7 @@ inline TComplex<double> TComplex<T>::ImPow(TComplex<T> st)
         }
       }
     }
-    TComplex<double> res(round(pow(M_E,st.re*log(pow(im * im + re * re, 0.5))-fi*st.im)*cos(fi*st.re+st.im*log(pow(im * im + re * re, 0.5)))*100000)/100000, round(pow(M_E, st.re * log(pow(im * im + re * re, 0.5)) - fi * st.im) * sin(fi * st.re + st.im * log(pow(im * im + re * re, 0.5)))*100000)/100000);
+    TComplex<T> res(round(pow(M_E,st.re*log(pow(im * im + re * re, 0.5))-fi*st.im)*cos(fi*st.re+st.im*log(pow(im * im + re * re, 0.5)))*100000)/100000, round(pow(M_E, st.re * log(pow(im * im + re * re, 0.5)) - fi * st.im) * sin(fi * st.re + st.im * log(pow(im * im + re * re, 0.5)))*100000)/100000);
     return res;
   }
 }
