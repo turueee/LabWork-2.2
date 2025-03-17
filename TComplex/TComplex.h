@@ -5,7 +5,7 @@
 #include <cmath>
 
 using namespace std;
-template <typename T>
+template <class T>
 class TComplex
 {
 protected:
