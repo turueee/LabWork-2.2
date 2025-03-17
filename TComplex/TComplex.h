@@ -313,7 +313,7 @@ inline ostream& operator<<(ostream& o, TComplex<D>& b)
 template<typename D>
 inline istream& operator>>(istream& i, TComplex<D>& b)
 {
-  T re_, im_;
+  D re_, im_;
   cout << "Enter a real part of number: " << endl;
   i >> re_;
   cout << "Enter an imaginary part of number: " << endl;
