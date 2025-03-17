@@ -128,6 +128,8 @@ inline TComplex<T> TComplex<T>::operator*(const TComplex<T>& p)
 template<class T>
 inline TComplex<T> TComplex<T>::operator/(const TComplex<T>& p)
 {
+  if (p.im == 0 && p.re == 0)
+    throw("Division by zero");
   return TComplex((re * p.re + im * p.im) / (p.re * p.re + p.im * p.im), (im * p.re - re * p.im) / (p.re * p.re + p.im * p.im));
 }
 
@@ -163,6 +165,8 @@ inline TComplex<T> TComplex<T>::operator*=(const TComplex<T>& p)
 template<class T>
 inline TComplex<T> TComplex<T>::operator/=(const TComplex<T>& p)
 {
+  if (p.im == 0 && p.re == 0)
+    throw("Division by zero");
   T re_ = re;
   re = (re_ * p.re + im * p.im) / (p.re * p.re + p.im * p.im);
   im = (im * p.re - re_ * p.im) / (p.re * p.re + p.im * p.im);
