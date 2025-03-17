@@ -299,7 +299,7 @@ inline void TComplex<T>::PrintTrig()
 }
 
 
-template<class T>
+template<typename T>
 inline ostream& operator<<(ostream& o, TComplex<T>& b)
 {
   if (b.im >= 0)
@@ -310,7 +310,7 @@ inline ostream& operator<<(ostream& o, TComplex<T>& b)
 }
 
 
-template<class T>
+template<typename T>
 inline istream& operator>>(istream& i, TComplex<T>& b)
 {
   T re_, im_;
