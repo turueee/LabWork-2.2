@@ -322,5 +322,3 @@ inline istream& operator>>(istream& i, TComplex<D>& b)
   b.SetIm(im_);
   return i;
 }
-
-void print();
