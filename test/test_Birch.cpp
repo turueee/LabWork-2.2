@@ -3,7 +3,7 @@
 #include <gtest.h>
 
 
-///Тесты для класса TAllInstruments
+///РўРµСЃС‚С‹ РґР»СЏ РєР»Р°СЃСЃР° TAllInstruments
 TEST(TComplex, can_create_Complex_with_positive_count)
 {
   ASSERT_NO_THROW(TComplex<double> z(8,5));
@@ -78,6 +78,13 @@ TEST(TComplex, can_divide_numbers)
 }
 
 
+TEST(TComplex, throws_divide_number_by_zero)
+{
+  TComplex<double> z(2,3), r(0, 0);
+  ASSERT_ANY_THROW(z/r);
+}
+
+
 TEST(TComplex, can_equal_add_numbers)
 {
   TComplex<double> z(2, 3), p(3, 5), r(5, 8);
@@ -107,6 +114,13 @@ TEST(TComplex, can_equal_divide_numbers)
   TComplex<double> z(4, 0), p(2, 0), r(2, 0);
   z /= p;
   EXPECT_NEAR(1, z == r, 0.000001);
+}
+
+
+TEST(TComplex, throws_equal_divide_number_by_zero)
+{
+  TComplex<double> z(2, 3), r(0, 0);
+  ASSERT_ANY_THROW(z /= r);
 }
 
 
