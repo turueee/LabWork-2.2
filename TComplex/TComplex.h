@@ -43,11 +43,11 @@ public:
   TComplex<T> ImPow(TComplex<T> st);
   void PrintTrig();
 
-  template<class T>
-  friend ostream& operator<<(ostream& o, TComplex<T>& b);
+  template<class D>
+  friend ostream& operator<<(ostream& o, TComplex<D>& b);
 
-  template<class T>
-  friend istream& operator>>(istream& i, TComplex& b);
+  template<class D>
+  friend istream& operator>>(istream& i, TComplex<D>& b);
 };
 
 
@@ -299,8 +299,8 @@ inline void TComplex<T>::PrintTrig()
 }
 
 
-template<typename T>
-inline ostream& operator<<(ostream& o, TComplex<T>& b)
+template<typename D>
+inline ostream& operator<<(ostream& o, TComplex<D>& b)
 {
   if (b.im >= 0)
     o << b.re << " + " << b.im << "i" << endl;
@@ -310,8 +310,8 @@ inline ostream& operator<<(ostream& o, TComplex<T>& b)
 }
 
 
-template<typename T>
-inline istream& operator>>(istream& i, TComplex<T>& b)
+template<typename D>
+inline istream& operator>>(istream& i, TComplex<D>& b)
 {
   T re_, im_;
   cout << "Enter a real part of number: " << endl;
