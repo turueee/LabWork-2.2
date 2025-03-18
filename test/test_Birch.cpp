@@ -183,3 +183,17 @@ TEST(TComplex, throws_impow_uncertainty_0_0)
   TComplex<double> z(0, 0),r(0,0);
   ASSERT_ANY_THROW(z.ImPow(r));
 }
+
+
+TEST(TComplex, throws_impow_uncertainty_1_devide_0)
+{
+  TComplex<double> z(0, 0), r(-2, 0);
+  ASSERT_ANY_THROW(z.ImPow(r));
+}
+
+
+TEST(TComplex, throws_impow_uncertainty_1_devide_im0)
+{
+  TComplex<double> z(0, 0), r(0, -2);
+  ASSERT_ANY_THROW(z.ImPow(r));
+}

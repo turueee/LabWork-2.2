@@ -242,10 +242,12 @@ inline TComplex<T> TComplex<T>::Pow(double st)
 template<class T>
 inline TComplex<T> TComplex<T>::ImPow(TComplex<T> st)
 {
-  if (im == 0 && re == 0 && st.im == 0 && st.re == 0)
+  if ((im == 0 && re == 0 && st.re == 0) || (im == 0 && re == 0 && st.re < 0 && st.im == 0))
   {
-    throw("Uncertainty");
+    throw "Uncertainty";
   }
+  if (im == 0 && re == 0 && st.re > 0 && st.im == 0)
+    return TComplex<double>(0,0);
   else
   {
     double fi;
