@@ -38,4 +38,4 @@ jobs:
           make
           echo make complete
           ./test/ComplexTest
-        #./Main/ComplexApplication
+          ./Main/ComplexApplication
