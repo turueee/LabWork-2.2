@@ -38,7 +38,7 @@ public:
   bool operator!=(const TComplex<T>& p);
   bool operator==(const TComplex<T>& p);
 
-  double Abs();
+  T Abs();
   TComplex<T> Pow(double st);
   TComplex<T> ImPow(TComplex<T> st);
   void PrintTrig();
@@ -204,7 +204,7 @@ inline bool TComplex<T>::operator==(const TComplex<T>& p)
 
 
 template<class T>
-inline double TComplex<T>::Abs()
+inline T TComplex<T>::Abs()
 {
   return pow(re * re + im * im, 0.5);
 }
